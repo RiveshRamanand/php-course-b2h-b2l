@@ -1,4 +1,5 @@
 <?php
+session_start();
 include '18_database-connection.php';
 
 global $db;
@@ -32,6 +33,11 @@ if ($id !== null && $id !== false) {
     <title>Document</title>
 </head>
 <body>
+    <?php 
+    if (isset($_SESSION['message'])) {
+        echo ($_SESSION['message']);
+    }    
+?>
 <h1><?=$category['naam'] ?></h1>
 <table>
 <?php foreach ($bikes as $bike): ?>
@@ -40,6 +46,7 @@ if ($id !== null && $id !== false) {
         <?=$bike['type']?>
     </td>
     <td><a href="update.php?id=<?= $bike['id'] ?>"> update</a></td>
+    <td><a href="delete.php?id=<?= $bike['id'] ?>">delete</a></td>
 </tr>
 <?php endforeach;?>
 </table>
